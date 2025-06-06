@@ -63,7 +63,7 @@ export const DashboardSidebar = () => {
                             {firstSection.map((item) => (
                                 <SidebarMenuItem key={item.href}>
                                     <SidebarMenuButton asChild
-                                        className={cn("h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to sidebar/50",
+                                        className={cn("h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-10% via-100% via-sidebar/80 to sidebar/20",
                                             pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10")}
                                         isActive={pathname === item.href}
                                     >
@@ -88,7 +88,7 @@ export const DashboardSidebar = () => {
                             {secondSection.map((item) => (
                                 <SidebarMenuItem key={item.href}>
                                     <SidebarMenuButton asChild
-                                        className={cn("h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to sidebar/50",
+                                        className={cn("h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-10% via-100% via-sidebar/80 to-sidebar/20",
                                             pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10")}
                                         isActive={pathname === item.href}
                                     >

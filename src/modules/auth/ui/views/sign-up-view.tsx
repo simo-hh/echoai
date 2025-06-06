@@ -151,7 +151,7 @@ export const SignUpView = () => {
                                             <FormLabel>Password</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="***********"
+                                                    placeholder="Password"
                                                     {...field}
                                                     type="password"
                                                 />
@@ -170,7 +170,7 @@ export const SignUpView = () => {
                                             <FormLabel>Confirm Password</FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder="***********"
+                                                    placeholder="Password"
                                                     {...field}
                                                     type="password"
                                                 />
@@ -216,7 +216,7 @@ export const SignUpView = () => {
                             </div>
                         </form>
                     </Form>
-                    <div className ="bg-radial from-blue-700 to0-blue-900 relative hidden md:flex flex-col
+                    <div className ="bg-radial from-gray-100 to-gray-400 relative hidden md:flex flex-col
                         gap-y-4 items-center justify-center">
                             <img src='/logo.svg' alt='Echo.AI' className="h-[92px] w-[92px]" />
                             <p className="text-2xl font-semibold text-black">
