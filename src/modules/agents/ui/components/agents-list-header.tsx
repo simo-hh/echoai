@@ -24,9 +24,9 @@ export const AgentsListHeader = () => {
         <>
         <NewAgentDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}  />
         <div className="yt-4 px-4 md:px-8 flex flex-col gap-y-4">
-            <div className="flex items-center justify-between mt-2">
-                <h5 className="font-medium text-xl">My agents</h5>
-                <Button onClick={() => setIsDialogOpen(true)}>
+            <div className="flex items-center justify-between">
+                <h5 className="font-medium text-xl mt-4">My Agents</h5>
+                <Button className="mt-4" onClick={() => setIsDialogOpen(true)}>
                     <PlusIcon />
                     New Agent 
                 </Button>
