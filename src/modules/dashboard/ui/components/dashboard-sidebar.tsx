@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { DashboardUserButton } from "./dashboard-user-button";
 
+
 const firstSection = [
     {
         icon: VideoIcon,
