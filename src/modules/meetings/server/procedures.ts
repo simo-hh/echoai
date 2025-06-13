@@ -6,8 +6,41 @@ import { TRPCError } from "@trpc/server";
 import { z} from "zod";
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "@/constants";
 import { TicketX } from "lucide-react";
+import { meetingsInsertScheama, meetingsUpdateSchema } from "../schemas";
 
 export const meetingsRouter = createTRPCRouter({
+    update: protectedProcedure
+            .input(meetingsUpdateSchema)
+            .mutation(async ({ctx, input}) => {
+                const [updatedMeeting] = await db
+                    .update(meetings)
+                    .set(input)
+                    .where(
+                        and(
+                            eq(meetings.id, input.id),
+                            eq(meetings.userId, ctx.auth.user.id),
+                        )
+                    )
+                    .returning();
+    
+                    if (!updatedMeeting) {
+                        throw new TRPCError({code: "NOT_FOUND", message: "Agent not found!"});
+                    }
+    
+                    return updatedMeeting;
+    
+            }),
+    create: protectedProcedure.input(meetingsInsertScheama).mutation(async ({ input, ctx }) => {
+            const [createdMeeting] = await db
+                .insert(meetings)
+                .values({
+                    ...input,
+                    userId: ctx.auth.user.id,
+                })
+                .returning();
+    
+                return createdMeeting;
+        }),
     getOne: protectedProcedure.input(z.object({id: z.string()})).query(async ({ctx, input}) => {
         const [existingMeeting] = await db
             .select({
@@ -44,7 +77,7 @@ export const meetingsRouter = createTRPCRouter({
         const {search, page, pageSize} = input;
         const data = await db
             .select({
-                meetingCount: sql<number>`5`,    
+                //meetingCount: sql<number>`5`,    
                 ...getTableColumns(meetings),
             })
             .from(meetings)
