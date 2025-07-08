@@ -13,6 +13,7 @@ import { streamVideo } from "@/lib/stream-video";
 import { NextRequest, NextResponse } from "next/server";
 import { unknown } from "zod";
 import { agents, meetings } from "@/db/schema";
+import { inngest } from "@/inngest/client";
 
 
 function verifySignatureWithSDK(body: string, signature: string): boolean {
@@ -61,7 +62,7 @@ export async function POST(req: NextRequest) {
             .from(meetings)
             .where(
                 and(
-                    eq(meetingId, meetingId),
+                    eq(meetings.id ,meetingId),
                     not(eq(meetings.status, "completed")),
                     not(eq(meetings.status, "active")),
                     not(eq(meetings.status, "cancelled")),
@@ -90,16 +91,21 @@ export async function POST(req: NextRequest) {
         }
 
         const call = streamVideo.video.call("default", meetingId);
-        const realtimeClient = await streamVideo.video.connectOpenAi({
-            call,
-            openAiApiKey: process.env.OPENAI_API_KEY!,
-            agentUserId: existingAgent.id,
-        });
+        try {
+            const realtimeClient = await streamVideo.video.connectOpenAi({
+                    call,
+                    openAiApiKey: process.env.OPENAI_API_KEY!,
+                    agentUserId: existingAgent.id,
+             });
 
-        realtimeClient.updateSession({
-            instructions: existingAgent.instructions,
-        });
-            
+            console.log("Connected OpenAI Agent:", existingAgent.id);
+
+            realtimeClient.updateSession({
+                    instructions: existingAgent.instructions,
+            });
+            } catch (e) {
+                console.error("Failed to connect OpenAI agent:", e);
+            }
     } else if (eventType === "call.session_participant_left") {
         const event = payload as CallSessionParticipantLeftEvent;
         const meetingId = event.call_cid.split(":")[1]; // call_cid is formatted as "type:id"
@@ -140,6 +146,14 @@ export async function POST(req: NextRequest) {
         if (!updatedMeeting) {
             return NextResponse.json({error: "Meeting not found"}, {status: 404});
         }
+
+        await inngest.send({
+            name: "meetings/processing",
+            data: {
+                meetingId: updatedMeeting.id,
+                transcriptUrl: updatedMeeting.transcriptUrl,
+            },
+        })
 
     } else if (eventType === "call.recording_ready") {
         const event = payload as CallRecordingReadyEvent;
