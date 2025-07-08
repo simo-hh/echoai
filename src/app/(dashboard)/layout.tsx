@@ -11,14 +11,10 @@ const Layout = ({ children }: Props) => {
     return (
         <SidebarProvider>
             <DashboardSidebar />
-            <html className="h-full">
-            <body className="h-full bg-muted">
-                <main className="flex flex-col min-h-screen w-full bg-muted">
+            <main className="flex flex-col h-screen w-screen bg-muted">
                 <DashboardNavbar />
                 {children}
-                </main>
-            </body>
-            </html>
+            </main>
         </SidebarProvider>
     );
 }
