@@ -3,10 +3,9 @@
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import { useTRPC } from "@/trpc/client";
-import { QueryClient, useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { MeetingIdViewHeader } from "../components/meeting-id-view-header";
-import { useRouter } from "next/navigation";
-import { useCommandState } from "cmdk";
+import { useRouter } from "next/navigation";  
 import { useConfirm } from "@/hooks/use-confirm";
 import { useState } from "react";
 import { UpdateMeetingDialog } from "../components/update-meeting-dialog";
@@ -74,8 +73,6 @@ export const MeetingIdView = ({meetingId}: Props) => {
                 {isCompleted && <CompletedState data={data} />}
                 {isUpcoming && <UpcomingState
                     meetingId={meetingId}
-                    onCancelMeeting={() => {}}
-                    isCancelling={false}
                 />}
                 {isActive && <ActiveState
                     meetingId={meetingId} />}

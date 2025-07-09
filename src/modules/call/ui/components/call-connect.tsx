@@ -6,7 +6,6 @@ import {
     StreamCall,
     StreamVideo,
     StreamVideoClient,
-    useCall,
 } from "@stream-io/video-react-sdk"
 
 import { useTRPC } from "@/trpc/client"

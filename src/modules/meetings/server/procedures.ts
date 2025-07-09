@@ -1,4 +1,4 @@
-import { createTRPCRouter, baseProcedure, protectedProcedure } from "@/trpc/init";
+import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 import {db} from "@/db";
 import JSONL from "jsonl-parse-stringify"
 import {agents, meetings, user} from "@/db/schema";
@@ -6,12 +6,10 @@ import { and, count, desc, eq, getTableColumns, ilike, inArray, sql } from "driz
 import { TRPCError } from "@trpc/server";
 import { z} from "zod";
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE, MIN_PAGE_SIZE } from "@/constants";
-import { TicketX } from "lucide-react";
 import { meetingsInsertScheama, meetingsUpdateSchema } from "../schemas";
 import { MeetingStatus, StreamTranscriptItem } from "../types";
 import { streamVideo } from "@/lib/stream-video";
 import { generateAvatarUri } from "@/lib/avatar";
-import Stream from "stream";
 import { streamChat } from "@/lib/stream-chat";
 
 export const meetingsRouter = createTRPCRouter({

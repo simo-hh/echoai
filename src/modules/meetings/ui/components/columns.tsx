@@ -6,7 +6,6 @@ import { GenerateAvatar } from "@/components/generate-avatar"
 import { CircleCheckIcon, CircleXIcon, ClockArrowUpIcon, ClockFadingIcon, CornerDownRightIcon, LoaderIcon, VideoIcon} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { format } from "date-fns"
-import humanizeDuration from "humanize-duration";
 import { cn } from "@/lib/utils"
 import { formatDuration } from "@/lib/utils"
 

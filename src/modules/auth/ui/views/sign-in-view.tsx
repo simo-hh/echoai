@@ -9,7 +9,9 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {FaGithub, FaGoogle} from "react-icons/fa";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import Image from "next/image";
+
 
 import {
     Form,
@@ -23,7 +25,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { set } from "date-fns";
 import React from "react";
 
 const formSchema = z.object({
@@ -49,7 +50,7 @@ export const SignInView = () => {
         setError(null);
         setPending(true);
 
-        const { error } = await authClient.signIn.email({
+        await authClient.signIn.email({
             email: data.email,
             password: data.password,
             callbackURL: "/",
@@ -71,7 +72,7 @@ export const SignInView = () => {
             setError(null);
             setPending(true);
     
-            const { error } = await authClient.signIn.social({
+            await authClient.signIn.social({
                 provider: provider,
                 callbackURL: "/",
             },
@@ -164,7 +165,7 @@ export const SignInView = () => {
                                 </Button>
                             </div>
                             <div className="text-center text-sm mt-4">
-                                Don't have an account?{" "}
+                                Don&apos;t have an account?{" "}
                                 <Link href="/sign-up" className="underline undeline-offset-4">
                                     Sign Up
                                 </Link>
@@ -173,7 +174,7 @@ export const SignInView = () => {
                     </Form>
                     <div className ="bg-radial from-gray-100 to-gray-400 relative hidden md:flex flex-col
                         gap-y-4 items-center justify-center">
-                            <img src='/logo.svg' alt='Echo.AI' className="h-[92px] w-[92px]" />
+                            <Image src='/logo.svg' alt='Echo.AI' width={92} height={92} />
                             <p className="text-2xl font-semibold text-black">
                                 Echo.AI
                             </p>

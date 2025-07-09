@@ -8,7 +8,6 @@ import { EmptyState } from "@/components/empty-state";
 import { useRouter } from "next/navigation";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
 import { DataPagination } from "@/components/data-pagination";
-import { setGlobal } from "next/dist/trace";
 
 export const MeetingsView = () => {
     const trpc = useTRPC();

@@ -13,54 +13,51 @@ import { SearchParams } from "nuqs/server";
 import { loadSearchParams } from "@/modules/agents/params";
 
 interface Props {
-    searchParams: Promise<SearchParams>
+  searchParams: Promise<SearchParams>;
 }
 
-const Page =  async ({searchParams} : Props) => {
-    const filters = await loadSearchParams(searchParams);
-    const session = await auth.api.getSession({
-            headers: await headers(),
-        
-          });
-          if (!session) {
-            return (
-              redirect("/sign-in")
-            );
-          }
-          
-    const queryClient = getQueryClient();
-    void queryClient.prefetchQuery(
-        trpc.meetings.getMany.queryOptions({
-            ...filters,
-        })
-    );
-    
-    return (
-        <>
-            <MeetingsListHeader />
-            <HydrationBoundary state={dehydrate(queryClient)}>
-                <Suspense fallback={<MeetingsViewLoading />}>
-                    <ErrorBoundary fallback={<MeetingsViewError />}>
-                        <MeetingsView />
-                    </ErrorBoundary>
-                </Suspense>
-            </HydrationBoundary>
-        </>
-    );
-};
+export default async function Page({ searchParams }: Props) {
+  const filters = await loadSearchParams(searchParams);
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-export const MeetingsViewLoading = () => {
-    return (
-        <LoadingState title="Loading Meetings" description="It may take a few seconds"/>
-    );
+  if (!session) {
+    redirect("/sign-in");
+  }
+
+  const queryClient = getQueryClient();
+  void queryClient.prefetchQuery(
+    trpc.meetings.getMany.queryOptions({
+      ...filters,
+    })
+  );
+
+  return (
+    <>
+      <MeetingsListHeader />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense fallback={<MeetingsViewLoading />}>
+          <ErrorBoundary fallback={<MeetingsViewError />}>
+            <MeetingsView />
+          </ErrorBoundary>
+        </Suspense>
+      </HydrationBoundary>
+    </>
+  );
 }
 
-export const MeetingsViewError = () => {
-    return (
-        <ErrorState
-            title="Error Loading Meetings"
-            description={"Please try again later"}/>
-    );
+function MeetingsViewLoading() {
+  return (
+    <LoadingState title="Loading Meetings" description="It may take a few seconds" />
+  );
 }
 
-export default Page;
+function MeetingsViewError() {
+  return (
+    <ErrorState
+      title="Error Loading Meetings"
+      description={"Please try again later"}
+    />
+  );
+}

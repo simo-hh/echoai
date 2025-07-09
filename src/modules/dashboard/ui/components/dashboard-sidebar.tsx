@@ -10,11 +10,10 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
-    SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 
-import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
+import { BotIcon, VideoIcon } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -35,13 +34,13 @@ const firstSection = [
     }
 ]
 
-const secondSection = [
-    {
-        icon: StarIcon,
-        label: "Upgrade",
-        href: "/upgrade",
-    },
-]
+// const secondSection = [
+//     {
+//         icon: StarIcon,
+//         label: "Upgrade",
+//         href: "/upgrade",
+//     },
+// ]
 
 export const DashboardSidebar = () => {
     const pathname = usePathname();
@@ -86,7 +85,7 @@ export const DashboardSidebar = () => {
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            {secondSection.map((item) => (
+                            {/* {secondSection.map((item) => (
                                 <SidebarMenuItem key={item.href}>
                                     <SidebarMenuButton asChild
                                         className={cn("h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-10% via-100% via-sidebar/80 to-sidebar/20",
@@ -101,14 +100,14 @@ export const DashboardSidebar = () => {
                                         </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
-                            ))}
+                            ))} */}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter className="text-white">
                 <DashboardUserButton />
-                </SidebarFooter>"
+                </SidebarFooter>
         </Sidebar>
     );
 };

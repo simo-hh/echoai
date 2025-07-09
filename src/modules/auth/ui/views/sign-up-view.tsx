@@ -9,7 +9,9 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { FaGithub, FaGoogle} from "react-icons/fa";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import Image from "next/image";
+
 
 import {
     Form,
@@ -23,7 +25,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { set } from "date-fns";
 import React from "react";
 
 const formSchema = z.object({
@@ -56,7 +57,7 @@ export const SignUpView = () => {
         setError(null);
         setPending(true);
 
-        const { error } = await authClient.signUp.email({
+        await authClient.signUp.email({
             name: data.name,
             email: data.email,
             password: data.password,
@@ -79,7 +80,7 @@ export const SignUpView = () => {
         setError(null);
         setPending(true);
 
-        const { error } = await authClient.signIn.social({
+        await authClient.signIn.social({
             provider: provider,
             callbackURL: "/",
         },
@@ -103,7 +104,7 @@ export const SignUpView = () => {
                         <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
                             <div className="flex flex-col gap-6">
                                 <h1 className="text-2xl font-bold">
-                                    Let's get started
+                                    Let&apos;s get started
                                 </h1>
                             </div>
                             <div className="grid gap-3 mt-3">
@@ -218,7 +219,7 @@ export const SignUpView = () => {
                     </Form>
                     <div className ="bg-radial from-gray-100 to-gray-400 relative hidden md:flex flex-col
                         gap-y-4 items-center justify-center">
-                            <img src='/logo.svg' alt='Echo.AI' className="h-[92px] w-[92px]" />
+                            <Image src='/logo.svg' alt='Echo.AI' width={92} height={92} />
                             <p className="text-2xl font-semibold text-black">
                                 Echo.AI
                             </p>

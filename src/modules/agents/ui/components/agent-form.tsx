@@ -1,6 +1,5 @@
-import { init } from "next/dist/compiled/webpack/webpack";
 import { AgentGetOne } from "../../types";
-import { useMutation, useQueries, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTRPC } from "@/trpc/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -11,7 +10,6 @@ import { GenerateAvatar } from "@/components/generate-avatar";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
@@ -29,7 +27,6 @@ export const AgentForm = ({
     initialValues,
 }: AgentFormProps) => {
     const trpc = useTRPC();
-    const router = useRouter();
     const queryClient = useQueryClient();
 
     const createAgent = useMutation(

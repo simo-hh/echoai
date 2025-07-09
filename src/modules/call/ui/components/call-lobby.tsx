@@ -1,4 +1,4 @@
-import { LogIn, LogInIcon } from "lucide-react";
+import { LogInIcon } from "lucide-react";
 import Link from "next/link";
 
 import { authClient } from "@/lib/auth-client";
