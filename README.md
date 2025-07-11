@@ -155,37 +155,37 @@ src/
 └── trpc/                 # tRPC configuration and routers
 ```
 
-## 🔧 Available Scripts
+<!-- ## 🔧 Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run db:push` - Push database schema changes
-- `npm run db:studio` - Open Drizzle Studio
+- `npm run db:studio` - Open Drizzle Studio -->
 
 ## 🚀 Deployment
 
 The application is deployed on Vercel at **[echoai-sigma.vercel.app](https://echoai-sigma.vercel.app)**.
 
-### Deploy to Vercel
+<!-- ### Deploy to Vercel
 
 1. Push your code to GitHub
 2. Connect your repository to Vercel
 3. Configure environment variables in Vercel dashboard
-4. Deploy!
+4. Deploy! -->
 
-## 🤝 Contributing
+<!-- <!-- ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+5. Open a Pull Request -->
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
 
 ## 🙏 Acknowledgments
 
@@ -193,3 +193,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [OpenAI](https://openai.com/) for AI capabilities
 - [Vercel](https://vercel.com/) for hosting and deployment
 - [Next.js](https://nextjs.org/) for the amazing framework
+- Special thanks to [Cursor AI](https://www.cursor.so/) for providing an outstanding AI coding assistant that greatly accelerated the development process.
